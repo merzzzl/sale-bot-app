@@ -7,7 +7,7 @@ RUN go mod download
 COPY protocols/ /app/protocols/
 COPY backend/ ./
 ENV CGO_ENABLED=1
-RUN go build -trimpath -o /out/sale-bot-app ./cmd/app
+RUN go build -trimpath -o /out/app ./cmd/app
 
 FROM node:24-alpine AS frontend
 WORKDIR /app
@@ -22,8 +22,8 @@ RUN cd frontend && npm run build
 FROM alpine:3.23
 RUN apk add --no-cache ca-certificates libgcc
 WORKDIR /app
-COPY --from=backend /out/sale-bot-app /app/sale-bot-app
+COPY --from=backend /out/app /app/app
 COPY --from=frontend /app/frontend/dist /app/static
 ENV APP_STATIC_DIR=/app/static
 EXPOSE 8080
-CMD ["/app/sale-bot-app"]
+CMD ["/app/app"]

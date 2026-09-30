@@ -1,0 +1,7 @@
+{
+  email {$ACME_EMAIL}
+}
+
+{$APP_HOSTNAME} {
+  reverse_proxy sale-bot-app:8080
+}

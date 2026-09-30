@@ -9,7 +9,8 @@ payments inside Telegram.
 - **[Frontend](frontend)** — Telegram Mini App UI (React, Chakra UI, Vite).
 - **[Backend](backend)** — AI and Telegram integrations (Go, GORM, SQLite/Postgres).
 - **[Contracts / API clients](protocols)** — protobuf, Swagger and Go/TS clients.
-- **[Deployment examples](compose)** — Docker Compose for the whole stack.
+- **[Development deployment](compose)** — Docker Compose built from this checkout.
+- **[Standalone example](example)** — server installation using published images.
 
 ## Architecture
 
@@ -25,11 +26,14 @@ payments inside Telegram.
 This monorepo keeps focused components in separate directories:
 
 ```text
-backend/     Go application and integrations
-frontend/    Telegram Mini App UI
-protocols/   Contracts and generated Go/TypeScript API clients
-compose/     Deployment configuration
-screenshot/ Mini App screenshots
+.github/workflows/  CI and container publication
+backend/           Go application and integrations
+frontend/          Telegram Mini App UI
+protocols/         Contracts and generated Go/TypeScript API clients
+compose/           Deployment built from this checkout
+example/           Standalone deployment using published images
+scripts/           Installer and infrastructure checks
+screenshot/        Mini App screenshots
 ```
 
 The backend uses the local `protocols` Go module through a `replace` directive.
@@ -37,6 +41,10 @@ The frontend uses `@sale-bot-app/api` through `file:../protocols`.
 No separate API-client release is needed when contracts change.
 
 ## Quick start
+
+For server installation without source code, follow
+[example/README.md](example/README.md). It requires Docker/Compose and a published
+`ghcr.io/merzzzl/sale-bot-app` image. To build from this checkout:
 
 ```sh
 git clone https://github.com/merzzzl/sale-bot-app.git
@@ -51,14 +59,30 @@ Configure the main bot's Mini App URL in BotFather to point to your HTTPS domain
 
 ## Development
 
-Requirements: Go 1.26+, Node.js 24+, npm, and a C compiler for SQLite.
+Requirements: Go matching `backend/go.mod`, Node.js 24, npm, Make, Python 3,
+Docker/Compose and a C compiler for SQLite and race-enabled Go tests.
 
 ```sh
 make install
+make check
 make build
-make test
-make lint
+make docker
 ```
+
+Both app repositories expose the same commands:
+
+| Command | Purpose |
+| --- | --- |
+| `make install-go`, `make install-web` | Install dependencies for one stack |
+| `make check-go` | Go vet, race-enabled tests and package builds |
+| `make check-web` | ESLint, TypeScript and production frontend build |
+| `make check-compose` | Compose validation, shell syntax and installer tests |
+| `make test`, `make lint` | Run tests or linters separately |
+| `make build` | Build `backend/app` and `frontend/dist` |
+| `make docker` | Build the single root Dockerfile; override `IMAGE=...` |
+
+The Makefile includes the local Go/TS contracts when `protocols/` is present.
+There are no separate component release scripts or component Dockerfiles.
 
 Run the backend from `backend/` with `go run ./cmd/app` after setting the
 [environment variables](backend/README.md). It serves the built frontend from
@@ -72,9 +96,16 @@ For rootless Docker, pass `DOCKER_USER=0:0` when regenerating the TS client.
 
 ## Container publishing
 
-The Docker workflow publishes `ghcr.io/merzzzl/sale-bot-app` when a GitHub release
-is published, or on manual dispatch. Each build is also tagged `latest`.
-CI checks Go tests, lint, frontend/client builds and the combined Docker image.
+CI checks backend, frontend and deployment configuration in parallel, then
+builds the combined image. The workflow files and Makefile match `wg-easy-app`.
+
+The Publish workflow runs the same CI before publishing to GHCR. It runs on a
+published release or manually for the selected branch/tag and image tag.
+Images receive a version tag and `sha-<commit>`; stable releases also update
+`latest`. Prereleases do not update `latest`. Publication does not create or
+overwrite GitHub release descriptions.
+
+See [example/README.md](example/README.md) for image updates, backups and rollback.
 
 TypeScript is kept on 6.0.3, the latest version supported by typescript-eslint.
 Existing React Compiler form-state/ref diagnostics are reported as warnings;

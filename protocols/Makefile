@@ -2,9 +2,7 @@ PROTO_REST_DIR = $(shell go list -m -f '{{.Dir}}' github.com/merzzzl/proto-rest-
 OPENAPI_GENERATOR_VERSION = 7.25.0
 DOCKER_USER ?= $(shell id -u):$(shell id -g)
 
-.PHONY: commit generate generate-go generate-ts generate-doc
-commit:
-	sh ./scripts/commit.sh
+.PHONY: generate generate-go generate-ts generate-doc
 
 generate-go:
 	go mod download

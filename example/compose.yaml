@@ -1,8 +1,6 @@
 services:
   sale-bot-app:
     image: ${APP_IMAGE:-ghcr.io/merzzzl/sale-bot-app:latest}
-    build:
-      context: ..
     restart: unless-stopped
     environment:
       APP_HOSTNAME: ${APP_HOSTNAME:?Set APP_HOSTNAME in .env}

@@ -4,7 +4,16 @@
 node_modules/
 dist/
 .env
+.env.*
+!.env.example
+*.tsbuildinfo
+coverage.out
+.gocache/
+vendor/
+deploy/
+.vite/
 *.db
 *.db-shm
 *.db-wal
 /backend/sale-bot-app
+/backend/app
