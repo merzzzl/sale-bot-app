@@ -1,0 +1,23 @@
+{
+    "name": "@ltbots/api",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./ts/api/index.d.ts",
+            "default": "./ts/api/index.js"
+        }
+    },
+    "types": "./ts/api/index.d.ts",
+    "files": [
+        "ts/api"
+    ],
+    "scripts": {
+        "build": "tsc -p tsconfig.json"
+    },
+    "devDependencies": {
+        "axios": "^1.13.5",
+        "typescript": "^5.0.0"
+    }
+}

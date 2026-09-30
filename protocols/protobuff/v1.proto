@@ -1,0 +1,305 @@
+syntax = "proto3";
+package api;
+option go_package = "./api;api";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "restapi/annotations.proto";
+
+service Controller {
+  option (restapi.service) = {
+    base_path : "/api/v1"
+  };
+
+  // Register telegram bot on platform
+  rpc BotCreate(BotCreateRequest) returns (Bot) {
+    option (restapi.method) = {
+      method : "POST"
+      path : "/bots"
+      request : "*"
+      response : "*"
+    };
+  };
+
+  // Activate telegram bot
+  rpc BotActivate(BotActivateRequest) returns (google.protobuf.Empty) {
+    option (restapi.method) = {
+      method : "POST"
+      path : "/bots/:bot_id/activate"
+    };
+  };
+
+  // Deactivate telegram bot
+  rpc BotDeactivate(BotDeactivateRequest) returns (google.protobuf.Empty) {
+    option (restapi.method) = {
+      method : "POST"
+      path : "/bots/:bot_id/deactivate"
+    };
+  };
+
+  // Delete telegram bot from platform
+  rpc BotDelete(BotDeleteRequest) returns (google.protobuf.Empty) {
+    option (restapi.method) = {
+      method : "DELETE"
+      path : "/bots/:bot_id"
+    };
+  };
+
+  // List all telegram bots on platform
+  rpc BotList(google.protobuf.Empty) returns (BotListResponse) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/bots"
+      response : ".bots"
+    };
+  };
+
+  // Update telegram bot on platform
+  rpc BotUpdate(BotUpdateRequest) returns (Bot) {
+    option (restapi.method) = {
+      method : "PUT"
+      path : "/bots/:bot_id"
+      request : "*"
+      response : "*"
+    };
+  };
+
+  // Get telegram bot on platform
+  rpc BotGet(BotGetRequest) returns (Bot) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/bots/:bot_id"
+      response : "*"
+    };
+  };
+
+  // Create product for telegram bot
+  rpc ProductCreate(ProductCreateRequest) returns (Product) {
+    option (restapi.method) = {
+      method : "POST"
+      path : "/products"
+      request : "*"
+      response : "*"
+    };
+  };
+
+  // Delete product for telegram bot
+  rpc ProductDelete(ProductDeleteRequest) returns (google.protobuf.Empty) {
+    option (restapi.method) = {
+      method : "DELETE"
+      path : "/products/:product_id"
+    };
+  };
+
+  // List all products for telegram bot
+  rpc ProductList(ProductListRequest) returns (ProductListResponse) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/products?:bot_id"
+      response : ".products"
+    };
+  };
+
+  // Update product for telegram bot
+  rpc ProductUpdate(ProductUpdateRequest) returns (Product) {
+    option (restapi.method) = {
+      method : "PUT"
+      path : "/products/:product_id"
+      request : "*"
+      response : "*"
+    };
+  };
+
+  // Get product for telegram bot
+  rpc ProductGet(ProductGetRequest) returns (Product) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/products/:product_id"
+      response : "*"
+    };
+  };
+
+  // List of promt presets for telegram bot
+  rpc PromptPresetList(google.protobuf.Empty) returns (PromptPresetListResponse) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/settings/prompt-presets"
+      response : ".prompt_presets"
+    };
+  };
+
+  // Get statistics for user
+  rpc StatisticsGet(StatisticsGetRequest) returns (StatisticsGetResponse) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/statistics?:bot_id&:start_time&:end_time"
+      response : ".records"
+    };
+  };
+
+  // Get transactions
+  rpc TransactionsList(google.protobuf.Empty) returns (TransactionsListResponse) {
+    option (restapi.method) = {
+      method : "GET"
+      path : "/transactions"
+      response : ".transactions"
+    };
+  };
+
+  // Deposit transaction
+  rpc TransactionBill(TransactionBillRequest) returns (google.protobuf.Empty) {
+    option (restapi.method) = {
+      method : "POST"
+      path : "/transactions/bill"
+      request : "*"
+    };
+  };
+}
+
+message BotGetRequest {
+  int64 bot_id = 1;
+}
+
+message BotCreateRequest {
+  string bot_token = 1;
+}
+
+message BotActivateRequest {
+  int64 bot_id = 1;
+}
+
+message BotDeactivateRequest {
+  int64 bot_id = 1;
+}
+
+message BotDeleteRequest {
+  int64 bot_id = 1;
+}
+
+message BotUpdateRequest {
+  int64 bot_id = 1;
+  string prompt = 2;
+  int64 preset_id = 3;
+}
+
+message Bot {
+  int64 bot_id = 1;
+  string prompt = 2;
+  bool active = 3;
+  string token = 4;
+  int64 preset_id = 5;
+}
+
+message BotListResponse {
+  repeated Bot bots = 1;
+}
+
+enum Currency {
+  RUB = 0;
+  USD = 1;
+  EUR = 2;
+  XTR = 3;
+}
+
+message ProductGetRequest {
+  int64 product_id = 1;
+}
+
+message ProductCreateRequest {
+  string name = 1;
+  string description = 2;
+  int64 price = 3;
+  string pay_link = 4;
+  string image_url = 5;
+  int64 bot_id = 6;
+  Currency currency = 7;
+  bool use_invoice = 8;
+  string payment_token = 9;
+}
+
+message ProductDeleteRequest {
+  int64 product_id = 1;
+}
+
+message ProductUpdateRequest {
+  int64 product_id = 1;
+  string name = 2;
+  string description = 3;
+  int64 price = 4;
+  string pay_link = 5;
+  string image_url = 6;
+  Currency currency = 7;
+  bool use_invoice = 8;
+  string payment_token = 9;
+}
+
+message ProductListRequest {
+  int64 bot_id = 1;
+}
+
+message Product {
+  int64 product_id = 1;
+  string name = 2;
+  string description = 3;
+  int64 price = 4;
+  string pay_link = 5;
+  string image_url = 6;
+  int64 bot_id = 7;
+  Currency currency = 8;
+  bool use_invoice = 9;
+}
+
+message ProductListResponse {
+  repeated Product products = 1;
+}
+
+message PromptPreset {
+  int64 preset_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message PromptPresetListResponse {
+  repeated PromptPreset prompt_presets = 1;
+}
+
+message StatisticsGetRequest {
+  int64 start_time = 1;
+  int64 end_time = 2;
+  int64 bot_id = 3;
+}
+
+enum StatisticType {
+  MESSAGES = 0;
+  CHATS = 1;
+  PAYMENTS = 2;
+}
+
+message StatisticsGetResponse {
+  message Record {
+    StatisticType type = 1;
+    int64 value = 2;
+    int64 timestamp = 3;
+  }
+
+  repeated Record records = 1;
+}
+
+message TransactionsListResponse {
+  repeated Transaction transactions = 1;
+}
+
+enum TransactionType {
+  DEPOSIT = 0;
+  PAYMENT = 1;
+}
+
+message Transaction {
+  int64 transaction_id = 1;
+  int64 amount = 2;
+  TransactionType type = 3;
+  int64 timestamp = 4;
+}
+
+message TransactionBillRequest {
+  int64 amount = 1;
+}

@@ -1,0 +1,4 @@
+scripts/** linguist-detectable=false
+Makefile linguist-detectable=false
+go/** linguist-generated=true
+ts/** linguist-generated=true
