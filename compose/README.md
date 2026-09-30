@@ -1,85 +1,82 @@
-# Compose
+# sale-bot-app deployment
 
-Docker Compose stack for running the services locally using prebuilt container images.
+The backend, Mini App UI and API clients are built from this monorepo into
+`ghcr.io/merzzzl/sale-bot-app:latest`. Caddy provides HTTPS for Telegram webhooks.
 
-## What’s inside
+```sh
+git clone https://github.com/merzzzl/sale-bot-app.git
+cd sale-bot-app/compose
+cp .env.example .env
+# Set your public hostname, ACME email, Telegram token and OpenAI key in .env.
+docker compose up -d --build
+```
 
-This stack runs three services:
+Point the hostname's DNS record to your server and open ports 80 and 443.
+Configure the main bot's Mini App URL as `https://<APP_HOSTNAME>` in BotFather.
+SQLite and Caddy certificates are stored in persistent Docker volumes.
 
-- **backend**: `ghcr.io/ltbots/backend:latest`
-- **frontend**: `ghcr.io/ltbots/frontend:latest`
-- **caddy**: `caddy:2.11-alpine`
+To use a published image instead of building locally:
 
-Caddy routing:
+```sh
+docker compose pull
+docker compose up -d --no-build
+```
 
-- `/api/*` → `backend:8080`
-- `/webhook/*` → `backend:8080`
-- `/tg/*` → Telegram API (`https://api.telegram.org`)
-- everything else → `frontend:8080`
+Do not commit `.env` or database files. Back up the `sale-bot-app_data` volume.
 
-## Example configs
-compose.yaml:
+## Configuration reference
+
 <!-- BEGIN:compose.yaml -->
 ```yaml
 services:
-  backend:
-    image: ghcr.io/ltbots/backend:latest
+  sale-bot-app:
+    image: ghcr.io/merzzzl/sale-bot-app:latest
+    build:
+      context: ..
     restart: unless-stopped
     environment:
-      APP_HOSTNAME: localhost
-      APP_OPENAI_API_KEY: <past you open-ai key>
-      APP_OPENAI_MODEL: gpt-5-mini
-      APP_MAIN_BOT_TOKEN: <past you bot token>
+      APP_HOSTNAME: ${APP_HOSTNAME:?Set APP_HOSTNAME in .env}
+      APP_OPENAI_API_KEY: ${APP_OPENAI_API_KEY:?Set APP_OPENAI_API_KEY in .env}
+      APP_OPENAI_MODEL: ${APP_OPENAI_MODEL:-gpt-5-mini}
+      APP_MAIN_BOT_TOKEN: ${APP_MAIN_BOT_TOKEN:?Set APP_MAIN_BOT_TOKEN in .env}
       APP_DB_DRIVER: sqlite
       APP_DB_URL: /data/sqlite.db
-      APP_MESSAGE_PRICE: 50
-
-  frontend:
-    image: ghcr.io/ltbots/frontend:latest
-    restart: unless-stopped
+      APP_MESSAGE_PRICE: ${APP_MESSAGE_PRICE:-50}
+    volumes:
+      - sale-bot-app_data:/data
 
   caddy:
     image: caddy:2.11-alpine
     restart: unless-stopped
     depends_on:
-      - backend
-      - frontend
+      - sale-bot-app
+    environment:
+      APP_HOSTNAME: ${APP_HOSTNAME}
+      ACME_EMAIL: ${ACME_EMAIL}
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  sale-bot-app_data:
+  caddy_data:
+  caddy_config:
 ```
 <!-- END:compose.yaml -->
 
-Caddyfile:
 <!-- BEGIN:Caddyfile -->
 ```caddyfile
-:80 {
-  handle_path /tg/* {
-    reverse_proxy https://api.telegram.org {
-      header_up Host api.telegram.org
-    }
-  }
+{
+  email {$ACME_EMAIL}
+}
 
-  handle /api/* {
-    reverse_proxy backend:8080
-  }
-
-  handle /webhook/* {
-    reverse_proxy backend:8080
-  }
-
-  handle {
-    reverse_proxy frontend:8080
-  }
+{$APP_HOSTNAME} {
+  reverse_proxy sale-bot-app:8080
 }
 ```
 <!-- END:Caddyfile -->
-
-## Quick start
-
-```sh
-git clone https://github.com/ltbots/compose
-cd compose
-docker compose up -d
-```

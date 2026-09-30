@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	Hostname     string `env:"APP_HOSTNAME" envDefault:"localhost"`
+	StaticDir    string `env:"APP_STATIC_DIR" envDefault:"../frontend/dist"`
 	OpenAIAPIKey string `env:"APP_OPENAI_API_KEY" envDefault:"***"`
 	OpenAIModel  string `env:"APP_OPENAI_MODEL" envDefault:"gpt-5-mini"`
 	MainBotToken string `env:"APP_MAIN_BOT_TOKEN" envDefault:"***"`

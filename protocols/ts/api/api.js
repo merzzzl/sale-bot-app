@@ -21,34 +21,34 @@ export const ProductCurrencyEnum = {
     Rub: 'RUB',
     Usd: 'USD',
     Eur: 'EUR',
-    Xtr: 'XTR'
+    Xtr: 'XTR',
 };
 export const ProductCreateRequestCurrencyEnum = {
     Rub: 'RUB',
     Usd: 'USD',
     Eur: 'EUR',
-    Xtr: 'XTR'
+    Xtr: 'XTR',
 };
 export const ProductListResponseProductsInnerCurrencyEnum = {
     Rub: 'RUB',
     Usd: 'USD',
     Eur: 'EUR',
-    Xtr: 'XTR'
+    Xtr: 'XTR',
 };
 export const ProductUpdateRequestCurrencyEnum = {
     Rub: 'RUB',
     Usd: 'USD',
     Eur: 'EUR',
-    Xtr: 'XTR'
+    Xtr: 'XTR',
 };
 export const StatisticsGetResponseRecordsInnerTypeEnum = {
     Messages: 'MESSAGES',
     Chats: 'CHATS',
-    Payments: 'PAYMENTS'
+    Payments: 'PAYMENTS',
 };
 export const TransactionsListResponseTransactionsInnerTypeEnum = {
     Deposit: 'DEPOSIT',
-    Payment: 'PAYMENT'
+    Payment: 'PAYMENT',
 };
 /**
  * ControllerApi - axios parameter creator
@@ -66,7 +66,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'botId' is not null or undefined
             assertParamExists('controllerBotActivate', 'botId', botId);
             const localVarPath = `/api/v1/bots/{bot_id}/activate`
-                .replace(`{${"bot_id"}}`, encodeURIComponent(String(botId)));
+                .replace('{bot_id}', encodeURIComponent(String(botId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -126,7 +126,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'botId' is not null or undefined
             assertParamExists('controllerBotDeactivate', 'botId', botId);
             const localVarPath = `/api/v1/bots/{bot_id}/deactivate`
-                .replace(`{${"bot_id"}}`, encodeURIComponent(String(botId)));
+                .replace('{bot_id}', encodeURIComponent(String(botId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -155,7 +155,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'botId' is not null or undefined
             assertParamExists('controllerBotDelete', 'botId', botId);
             const localVarPath = `/api/v1/bots/{bot_id}`
-                .replace(`{${"bot_id"}}`, encodeURIComponent(String(botId)));
+                .replace('{bot_id}', encodeURIComponent(String(botId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -184,7 +184,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'botId' is not null or undefined
             assertParamExists('controllerBotGet', 'botId', botId);
             const localVarPath = `/api/v1/bots/{bot_id}`
-                .replace(`{${"bot_id"}}`, encodeURIComponent(String(botId)));
+                .replace('{bot_id}', encodeURIComponent(String(botId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -243,7 +243,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'botUpdateRequest' is not null or undefined
             assertParamExists('controllerBotUpdate', 'botUpdateRequest', botUpdateRequest);
             const localVarPath = `/api/v1/bots/{bot_id}`
-                .replace(`{${"bot_id"}}`, encodeURIComponent(String(botId)));
+                .replace('{bot_id}', encodeURIComponent(String(botId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -306,7 +306,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('controllerProductDelete', 'productId', productId);
             const localVarPath = `/api/v1/products/{product_id}`
-                .replace(`{${"product_id"}}`, encodeURIComponent(String(productId)));
+                .replace('{product_id}', encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -335,7 +335,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('controllerProductGet', 'productId', productId);
             const localVarPath = `/api/v1/products/{product_id}`
-                .replace(`{${"product_id"}}`, encodeURIComponent(String(productId)));
+                .replace('{product_id}', encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -400,7 +400,7 @@ export const ControllerApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'productUpdateRequest' is not null or undefined
             assertParamExists('controllerProductUpdate', 'productUpdateRequest', productUpdateRequest);
             const localVarPath = `/api/v1/products/{product_id}`
-                .replace(`{${"product_id"}}`, encodeURIComponent(String(productId)));
+                .replace('{product_id}', encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

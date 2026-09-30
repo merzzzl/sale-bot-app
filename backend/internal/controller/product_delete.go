@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/ltbots/protocols/go/api"
 	"github.com/merzzzl/proto-rest-api/runtime"
+	"github.com/merzzzl/sale-bot-app/protocols/go/api"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/protobuf/types/known/emptypb"
 )

@@ -4,7 +4,7 @@ import {
     Field,
 } from "@chakra-ui/react"
 import { useTranslation } from "react-i18next"
-import { useApi } from "@/lib/api"
+import { useApi, type PromptPreset } from "@/lib/api"
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { toaster } from "@/components/ui/toaster"
 import { FiSave } from "react-icons/fi"
@@ -24,8 +24,8 @@ export const BotParams = ({ botId }: { botId: string }) => {
     const [presetId, setPresetId] = useState(bot.data?.presetId || '')
     const [presetCollection, setPresetCollection] = useState(createListCollection({
         items: [],
-        itemToValue: (item: any) => item.presetId,
-        itemToString: (item: any) => item.name,
+        itemToValue: (item: PromptPreset) => item.presetId,
+        itemToString: (item: PromptPreset) => item.name,
     }))
 
     const promptPresets = useQuery({
@@ -37,8 +37,8 @@ export const BotParams = ({ botId }: { botId: string }) => {
         if (bot.data && promptPresets.data) {
             setPresetCollection(createListCollection({
                 items: promptPresets.data,
-                itemToValue: (item: any) => item.presetId,
-                itemToString: (item: any) => item.name,
+                itemToValue: (item: PromptPreset) => item.presetId,
+                itemToString: (item: PromptPreset) => item.name,
             }))
 
             setInstructions(bot.data.prompt)
@@ -86,7 +86,7 @@ export const BotParams = ({ botId }: { botId: string }) => {
                     <Portal>
                         <Select.Positioner>
                             <Select.Content>
-                                {presetCollection.items.map((preset: any) => (
+                                {presetCollection.items.map((preset: PromptPreset) => (
                                     <Select.Item item={preset} key={preset.presetId}>
                                         <Stack gap="0">
                                             <Select.ItemText>{preset.name}</Select.ItemText>

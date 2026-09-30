@@ -1,6 +1,6 @@
 # Frontend
 
-UI for the Telegram Mini App as part of **Light Telegram Bots**
+UI for the Telegram Mini App as part of **sale-bot-app**.
 
 ## Tech stack
 
@@ -12,5 +12,5 @@ UI for the Telegram Mini App as part of **Light Telegram Bots**
 
 ## Related repositories
 
-- Contracts / API clients: https://github.com/ltbots/protocols
-- Example docker-compose for the whole project: https://github.com/ltbots/compose
+- Contracts / API clients: [../protocols](../protocols)
+- Example docker-compose for the whole project: https://github.com/merzzzl/sale-bot-app/tree/main/compose

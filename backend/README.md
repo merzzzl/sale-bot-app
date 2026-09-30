@@ -1,6 +1,6 @@
 # Backend
 
-Backend service with OpenAI and Telegram integration for **Light Telegram Bots**
+Backend service with OpenAI and Telegram integration for **sale-bot-app**.
 
 ## Tech stack
 
@@ -13,6 +13,7 @@ Backend service with OpenAI and Telegram integration for **Light Telegram Bots**
 ## Environment
 
 - `APP_HOSTNAME` (default: `localhost`)
+- `APP_STATIC_DIR` (default: `../frontend/dist`; Docker: `/app/static`)
 - `APP_OPENAI_API_KEY` (required)
 - `APP_OPENAI_MODEL` (default: `gpt-5-mini`)
 - `APP_MAIN_BOT_TOKEN` (required)
@@ -22,5 +23,5 @@ Backend service with OpenAI and Telegram integration for **Light Telegram Bots**
 
 ## Related repositories
 
-- Contracts / API clients: https://github.com/ltbots/protocols
-- Example docker-compose for the whole project: https://github.com/ltbots/compose
+- Contracts / API clients: [../protocols](../protocols)
+- Example docker-compose for the whole project: https://github.com/merzzzl/sale-bot-app/tree/main/compose

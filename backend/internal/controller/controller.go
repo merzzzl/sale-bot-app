@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"github.com/ltbots/backend/internal/service"
-	"github.com/ltbots/protocols/go/api"
+	"github.com/merzzzl/sale-bot-app/backend/internal/service"
+	"github.com/merzzzl/sale-bot-app/protocols/go/api"
 )
 
 type ControllerService struct {

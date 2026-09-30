@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ltbots/backend/internal/model"
-	"github.com/ltbots/protocols/go/api"
 	"github.com/merzzzl/proto-rest-api/runtime"
+	"github.com/merzzzl/sale-bot-app/backend/internal/model"
+	"github.com/merzzzl/sale-bot-app/protocols/go/api"
 	"github.com/rs/zerolog/log"
 )
 

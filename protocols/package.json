@@ -1,5 +1,5 @@
 {
-    "name": "@ltbots/api",
+    "name": "@sale-bot-app/api",
     "version": "0.0.0",
     "private": true,
     "type": "module",
@@ -17,7 +17,9 @@
         "build": "tsc -p tsconfig.json"
     },
     "devDependencies": {
-        "axios": "^1.13.5",
-        "typescript": "^5.0.0"
+        "typescript": "~6.0.3"
+    },
+    "dependencies": {
+        "axios": "^1.20.0"
     }
 }

@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/ltbots/backend/internal/model"
-	"github.com/ltbots/protocols/go/api"
 	"github.com/merzzzl/proto-rest-api/runtime"
+	"github.com/merzzzl/sale-bot-app/backend/internal/model"
+	"github.com/merzzzl/sale-bot-app/protocols/go/api"
 	"github.com/rs/zerolog/log"
 )
 
@@ -30,13 +30,13 @@ func (c *ControllerService) ProductUpdate(ctx context.Context, req *api.ProductU
 	}
 
 	params := model.UpdateProductParams{
-		Name:        req.GetName(),
-		Description: req.GetDescription(),
-		Price:       req.GetPrice(),
-		PayLink:     req.GetPayLink(),
-		ImageURL:    req.GetImageUrl(),
-		Currency:    req.GetCurrency().String(),
-		UseInvoice:  req.GetUseInvoice(),
+		Name:         req.GetName(),
+		Description:  req.GetDescription(),
+		Price:        req.GetPrice(),
+		PayLink:      req.GetPayLink(),
+		ImageURL:     req.GetImageUrl(),
+		Currency:     req.GetCurrency().String(),
+		UseInvoice:   req.GetUseInvoice(),
 		PaymentToken: req.GetPaymentToken(),
 	}
 

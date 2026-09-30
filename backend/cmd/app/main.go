@@ -10,13 +10,13 @@ import (
 	"syscall"
 
 	"github.com/go-telegram/bot"
-	"github.com/ltbots/backend/internal/controller"
-	"github.com/ltbots/backend/internal/model"
-	"github.com/ltbots/backend/internal/service"
-	"github.com/ltbots/backend/internal/webhook"
-	"github.com/ltbots/protocols/go/api"
 	"github.com/merzzzl/proto-rest-api/runtime"
 	"github.com/merzzzl/proto-rest-api/swagger"
+	"github.com/merzzzl/sale-bot-app/backend/internal/controller"
+	"github.com/merzzzl/sale-bot-app/backend/internal/model"
+	"github.com/merzzzl/sale-bot-app/backend/internal/service"
+	"github.com/merzzzl/sale-bot-app/backend/internal/webhook"
+	"github.com/merzzzl/sale-bot-app/protocols/go/api"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/sashabaranov/go-openai"
@@ -113,11 +113,13 @@ func main() {
 
 	mux.Handle("/api/v1/swagger-ui/", swagger.Handler(api.GetV1Swagger()))
 	mux.Handle("/webhook/", wh.Router())
+	mux.Handle("/tg/", telegramProxy())
 
 	router.Router.HandleMethodNotAllowed = true
 	router.Router.HandleOPTIONS = true
 	router.Router.RedirectFixedPath = true
 	router.Router.RedirectTrailingSlash = true
+	handler := appHandler(mux, config.StaticDir)
 
 	httpServer := http.Server{
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -130,7 +132,7 @@ func main() {
 				return
 			}
 
-			mux.ServeHTTP(w, r)
+			handler.ServeHTTP(w, r)
 		}),
 	}
 

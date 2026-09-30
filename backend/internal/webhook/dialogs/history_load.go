@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ltbots/backend/internal/i18n"
-	"github.com/ltbots/backend/internal/model"
+	"github.com/merzzzl/sale-bot-app/backend/internal/i18n"
+	"github.com/merzzzl/sale-bot-app/backend/internal/model"
 	"github.com/sashabaranov/go-openai"
 )
 

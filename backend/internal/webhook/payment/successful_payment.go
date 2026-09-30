@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/go-telegram/bot"
-	"github.com/ltbots/backend/internal/i18n"
+	"github.com/merzzzl/sale-bot-app/backend/internal/i18n"
 	"github.com/rs/zerolog/log"
 )
 

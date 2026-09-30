@@ -10,7 +10,7 @@ function WebApp() {
 
   useEffect(() => {
     i18n.changeLanguage('ru')
-  }, [])
+  }, [i18n])
 
   return (
     <Box w="100vw" h="100vh">

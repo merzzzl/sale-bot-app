@@ -7,8 +7,8 @@ import (
 
 	"github.com/go-telegram/bot"
 	"github.com/go-telegram/bot/models"
-	"github.com/ltbots/backend/internal/i18n"
-	"github.com/ltbots/backend/internal/model"
+	"github.com/merzzzl/sale-bot-app/backend/internal/i18n"
+	"github.com/merzzzl/sale-bot-app/backend/internal/model"
 	"github.com/rs/zerolog/log"
 )
 

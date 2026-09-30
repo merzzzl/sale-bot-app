@@ -28,7 +28,7 @@ export declare const setSearchParams: (url: URL, ...objects: any[]) => void;
  * This function will run for every key-value pair encountered by JSON.stringify while traversing an object.
  * Converting a set to a string will return an empty object, so an intermediate conversion to an array is required.
  */
-export declare const replaceWithSerializableTypeIfNeeded: (key: any, value: any) => any;
+export declare const replaceWithSerializableTypeIfNeeded: (key: string, value: any) => any;
 export declare const serializeDataIfNeeded: (value: any, requestOptions: any, configuration?: Configuration) => any;
 export declare const toPathString: (url: URL) => string;
 export declare const createRequestFunction: (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) => <T = unknown, R = AxiosResponse<T>>(axios?: AxiosInstance, basePath?: string) => Promise<R>;

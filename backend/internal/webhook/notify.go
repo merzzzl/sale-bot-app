@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-telegram/bot"
 	"github.com/go-telegram/bot/models"
-	"github.com/ltbots/backend/internal/i18n"
+	"github.com/merzzzl/sale-bot-app/backend/internal/i18n"
 	"github.com/rs/zerolog/log"
 	"gorm.io/gorm"
 )

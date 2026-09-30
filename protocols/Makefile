@@ -1,33 +1,29 @@
+PROTO_REST_DIR = $(shell go list -m -f '{{.Dir}}' github.com/merzzzl/proto-rest-api)
+OPENAPI_GENERATOR_VERSION = 7.25.0
+DOCKER_USER ?= $(shell id -u):$(shell id -g)
+
+.PHONY: commit generate generate-go generate-ts generate-doc
 commit:
 	sh ./scripts/commit.sh
 
 generate-go:
-	rm -rf go
-	mkdir go
-	protoc \
-		-I=. \
-		-I ${GOPATH}/pkg/mod/github.com/merzzzl/proto-rest-api@v0.0.1-alpha.28 \
-		--go_out=go \
-		--go-rest_out=go \
-		protobuff/*.proto
+	go mod download
+	mkdir -p go
+	protoc -I=. -I "$(PROTO_REST_DIR)" --go_out=go --go-rest_out=go protobuff/*.proto
 
 generate-ts:
-	rm -rf ts
-	mkdir ts
-	npx @openapitools/openapi-generator-cli generate \
-		-i go/api/v1_swagger.json \
-		-g typescript-axios \
-		-o ts/src \
+	mkdir -p ts/src
+	docker run --rm --user "$(DOCKER_USER)" -v "$(CURDIR):/local" \
+		openapitools/openapi-generator-cli:v$(OPENAPI_GENERATOR_VERSION) generate \
+		-i /local/go/api/v1_swagger.json -g typescript-axios -o /local/ts/src \
 		--skip-validate-spec \
 		--additional-properties=typescriptThreePlus=true,withInterfaces=true,modelPropertyNaming=camelCase
-	npm i
+	npm ci
 	npm run build
 
 generate-doc:
-	rm README.md
-	npx swagger-markdown \
-		-i ./go/api/v1_swagger.json \
-		-o README.md.tmp
-	sed '1,4d' README.md.tmp > README.md && rm README.md.tmp
+	npx --yes swagger-markdown -i ./go/api/v1_swagger.json -o README.md.tmp
+	sed '1,4d' README.md.tmp > README.md
+	rm README.md.tmp
 
 generate: generate-go generate-ts generate-doc

@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo } from "react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useApi } from "@/lib/api"
 import { useNavigate } from "react-router-dom"
-import { ProductCurrencyEnum } from "@ltbots/api"
+import { ProductCurrencyEnum } from "@sale-bot-app/api"
 
 interface ProductEditProps {
     productId: string

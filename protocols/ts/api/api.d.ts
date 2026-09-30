@@ -682,7 +682,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotActivate(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    controllerBotActivate(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}, any>>;
     /**
      *
      * @summary Register telegram bot on platform
@@ -690,7 +690,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotCreate(botCreateRequest: BotCreateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Bot, any, {}>>;
+    controllerBotCreate(botCreateRequest: BotCreateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Bot, any, {}, any>>;
     /**
      *
      * @summary Deactivate telegram bot
@@ -698,7 +698,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotDeactivate(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    controllerBotDeactivate(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}, any>>;
     /**
      *
      * @summary Delete telegram bot from platform
@@ -706,7 +706,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotDelete(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    controllerBotDelete(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}, any>>;
     /**
      *
      * @summary Get telegram bot on platform
@@ -714,14 +714,14 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotGet(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Bot, any, {}>>;
+    controllerBotGet(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Bot, any, {}, any>>;
     /**
      *
      * @summary List all telegram bots on platform
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotList(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BotListResponseBotsInner[], any, {}>>;
+    controllerBotList(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BotListResponseBotsInner[], any, {}, any>>;
     /**
      *
      * @summary Update telegram bot on platform
@@ -730,7 +730,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerBotUpdate(botId: string, botUpdateRequest: BotUpdateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Bot, any, {}>>;
+    controllerBotUpdate(botId: string, botUpdateRequest: BotUpdateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Bot, any, {}, any>>;
     /**
      *
      * @summary Create product for telegram bot
@@ -738,7 +738,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerProductCreate(productCreateRequest: ProductCreateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Product, any, {}>>;
+    controllerProductCreate(productCreateRequest: ProductCreateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Product, any, {}, any>>;
     /**
      *
      * @summary Delete product for telegram bot
@@ -746,7 +746,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerProductDelete(productId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    controllerProductDelete(productId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}, any>>;
     /**
      *
      * @summary Get product for telegram bot
@@ -754,7 +754,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerProductGet(productId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Product, any, {}>>;
+    controllerProductGet(productId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Product, any, {}, any>>;
     /**
      *
      * @summary List all products for telegram bot
@@ -762,7 +762,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerProductList(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProductListResponseProductsInner[], any, {}>>;
+    controllerProductList(botId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProductListResponseProductsInner[], any, {}, any>>;
     /**
      *
      * @summary Update product for telegram bot
@@ -771,14 +771,14 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerProductUpdate(productId: string, productUpdateRequest: ProductUpdateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Product, any, {}>>;
+    controllerProductUpdate(productId: string, productUpdateRequest: ProductUpdateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Product, any, {}, any>>;
     /**
      *
      * @summary List of promt presets for telegram bot
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerPromptPresetList(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PromptPresetListResponsePromptPresetsInner[], any, {}>>;
+    controllerPromptPresetList(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PromptPresetListResponsePromptPresetsInner[], any, {}, any>>;
     /**
      *
      * @summary Get statistics for user
@@ -788,7 +788,7 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerStatisticsGet(botId: string, startTime: string, endTime: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<StatisticsGetResponseRecordsInner[], any, {}>>;
+    controllerStatisticsGet(botId: string, startTime: string, endTime: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<StatisticsGetResponseRecordsInner[], any, {}, any>>;
     /**
      *
      * @summary Deposit transaction
@@ -796,12 +796,12 @@ export declare class ControllerApi extends BaseAPI implements ControllerApiInter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerTransactionBill(transactionBillRequest: TransactionBillRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    controllerTransactionBill(transactionBillRequest: TransactionBillRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}, any>>;
     /**
      *
      * @summary Get transactions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    controllerTransactionsList(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TransactionsListResponseTransactionsInner[], any, {}>>;
+    controllerTransactionsList(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TransactionsListResponseTransactionsInner[], any, {}, any>>;
 }

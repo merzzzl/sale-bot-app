@@ -4,7 +4,7 @@ import { useApi, type Product } from "@/lib/api"
 import { Button } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import { FiPlus } from "react-icons/fi"
-import { ProductCurrencyEnum } from "@ltbots/api"
+import { ProductCurrencyEnum } from "@sale-bot-app/api"
 
 export interface ProductAddProps {
     botId: string

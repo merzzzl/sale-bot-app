@@ -58,9 +58,9 @@ export const BotStatistics = ({ botId }: BotStatisticsProps) => {
         }))
     }
 
-    const messagesData = aggregateBySlot(messages as any)
-    const chatsData = aggregateBySlot(chats as any)
-    const paymentsData = aggregateBySlot(payments as any)
+    const messagesData = aggregateBySlot(messages)
+    const chatsData = aggregateBySlot(chats)
+    const paymentsData = aggregateBySlot(payments)
 
     const messagesChart = useChart({
         data: messagesData,

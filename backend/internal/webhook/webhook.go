@@ -7,7 +7,7 @@ import (
 	"unicode"
 
 	"github.com/go-telegram/bot"
-	"github.com/ltbots/backend/internal/service"
+	"github.com/merzzzl/sale-bot-app/backend/internal/service"
 	"github.com/rs/zerolog/log"
 	"github.com/sashabaranov/go-openai"
 )

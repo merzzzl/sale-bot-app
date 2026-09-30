@@ -17,7 +17,14 @@ function BackButtonBridge() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const tg = (window as any)?.Telegram?.WebApp
+    const tg = (window as Window & {
+      Telegram?: { WebApp?: { BackButton: {
+        hide: () => void
+        show: () => void
+        onClick: (callback: () => void) => void
+        offClick?: (callback: () => void) => void
+      } } }
+    }).Telegram?.WebApp
     if (!tg) return
 
     const isRoot = location.pathname === '/'
@@ -29,7 +36,7 @@ function BackButtonBridge() {
     tg.BackButton.show()
     tg.BackButton.onClick(onBack)
     return () => {
-      try { tg.BackButton.offClick?.(onBack) } catch { }
+      try { tg.BackButton.offClick?.(onBack) } catch { /* Telegram may already be closed. */ }
     }
   }, [location.pathname, navigate])
 
@@ -42,7 +49,7 @@ function App() {
 
   useEffect(() => {
     i18n.changeLanguage('ru')
-  }, [])
+  }, [i18n])
 
   return (
     <Box w="100vw" h="100vh">

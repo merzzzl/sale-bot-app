@@ -1,8 +1,9 @@
 import { useRawInitData } from '@tma.js/sdk-react';
+import { isAxiosError } from 'axios';
 import {
     Configuration,
     ControllerApi
-} from '@ltbots/api'
+} from '@sale-bot-app/api'
 import type {
     BotCreateRequest,
     Bot,
@@ -13,7 +14,7 @@ import type {
     PromptPresetListResponsePromptPresetsInner as PromptPreset,
     StatisticsGetResponseRecordsInner as StatisticsRecord,
     TransactionsListResponseTransactionsInner as Transaction,
-} from '@ltbots/api'
+} from '@sale-bot-app/api'
 
 const API_BASE_URL = ''
 
@@ -42,9 +43,9 @@ const createApiClient = (initDataRaw: string | undefined) => {
 
 export class ApiError extends Error {
     status?: number
-    response?: any
+    response?: unknown
 
-    constructor(message: string, status?: number, response?: any) {
+    constructor(message: string, status?: number, response?: unknown) {
         super(message)
         this.name = 'ApiError'
         this.status = status
@@ -52,17 +53,17 @@ export class ApiError extends Error {
     }
 }
 
-const handleApiError = (error: any): never => {
-    if (error.response) {
+const handleApiError = (error: unknown): never => {
+    if (isAxiosError<{ message?: string }>(error) && error.response) {
         throw new ApiError(
             error.response.data?.message || 'Server error',
             error.response.status,
             error.response.data
         )
-    } else if (error.request) {
+    } else if (isAxiosError(error) && error.request) {
         throw new ApiError('No connection to server')
     } else {
-        throw new ApiError(error.message || 'Unknown error')
+        throw new ApiError(error instanceof Error ? error.message : 'Unknown error')
     }
 }
 

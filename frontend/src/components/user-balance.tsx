@@ -2,17 +2,15 @@ import { Text, Button, Menu, Portal, Box, type BoxProps } from "@chakra-ui/react
 import { useApi } from "@/lib/api"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { PiStarFill } from "react-icons/pi";
-import { useEffect, useState, useMemo } from "react"
 import { toaster } from "@/components/ui/toaster"
 import { useTranslation } from "react-i18next"
 
-interface UserBalanceProps extends BoxProps { }
+type UserBalanceProps = BoxProps
 
 export const UserBalance = (props: UserBalanceProps) => {
     const { transactionsApi } = useApi()
     const queryClient = useQueryClient()
     const { t } = useTranslation()
-    const [balance, setBalance] = useState(0)
 
     const transactions = useQuery({
         queryKey: ['transactions'],
@@ -28,7 +26,7 @@ export const UserBalance = (props: UserBalanceProps) => {
         })
     }
 
-    const actions = useMemo(() => [
+    const actions = [
         {
             label: "100",
             icon: <PiStarFill color="#eab308" />,
@@ -57,13 +55,9 @@ export const UserBalance = (props: UserBalanceProps) => {
                 createTransaction(1000)
             }
         }
-    ], [])
+    ]
 
-    useEffect(() => {
-        if (transactions.data) {
-            setBalance(Math.round(transactions.data.reduce((acc, transaction) => acc + Number(transaction.amount), 0) / 100))
-        }
-    }, [transactions.data])
+    const balance = Math.round((transactions.data ?? []).reduce((acc, transaction) => acc + Number(transaction.amount), 0) / 100)
     
     return (
         <Box {...props}>

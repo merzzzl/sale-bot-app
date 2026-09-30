@@ -49,7 +49,7 @@ export const BotActions = ({ botId }: { botId: string }) => {
         })
     }
 
-    const handleToggle = () => (!!bot.data?.active ? onDeactivate() : onActivate())
+    const handleToggle = () => (bot.data?.active ? onDeactivate() : onActivate())
 
     if (bot.isLoading) {
         return <BotActionsSkeleton />

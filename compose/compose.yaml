@@ -1,27 +1,38 @@
 services:
-  backend:
-    image: ghcr.io/ltbots/backend:latest
+  sale-bot-app:
+    image: ghcr.io/merzzzl/sale-bot-app:latest
+    build:
+      context: ..
     restart: unless-stopped
     environment:
-      APP_HOSTNAME: localhost
-      APP_OPENAI_API_KEY: <past you open-ai key>
-      APP_OPENAI_MODEL: gpt-5-mini
-      APP_MAIN_BOT_TOKEN: <past you bot token>
+      APP_HOSTNAME: ${APP_HOSTNAME:?Set APP_HOSTNAME in .env}
+      APP_OPENAI_API_KEY: ${APP_OPENAI_API_KEY:?Set APP_OPENAI_API_KEY in .env}
+      APP_OPENAI_MODEL: ${APP_OPENAI_MODEL:-gpt-5-mini}
+      APP_MAIN_BOT_TOKEN: ${APP_MAIN_BOT_TOKEN:?Set APP_MAIN_BOT_TOKEN in .env}
       APP_DB_DRIVER: sqlite
       APP_DB_URL: /data/sqlite.db
-      APP_MESSAGE_PRICE: 50
-
-  frontend:
-    image: ghcr.io/ltbots/frontend:latest
-    restart: unless-stopped
+      APP_MESSAGE_PRICE: ${APP_MESSAGE_PRICE:-50}
+    volumes:
+      - sale-bot-app_data:/data
 
   caddy:
     image: caddy:2.11-alpine
     restart: unless-stopped
     depends_on:
-      - backend
-      - frontend
+      - sale-bot-app
+    environment:
+      APP_HOSTNAME: ${APP_HOSTNAME}
+      ACME_EMAIL: ${ACME_EMAIL}
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  sale-bot-app_data:
+  caddy_data:
+  caddy_config:

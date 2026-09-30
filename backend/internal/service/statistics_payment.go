@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/ltbots/backend/internal/model"
+	"github.com/merzzzl/sale-bot-app/backend/internal/model"
 	"github.com/rs/zerolog/log"
 )
 

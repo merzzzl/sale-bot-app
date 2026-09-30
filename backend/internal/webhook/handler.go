@@ -6,9 +6,9 @@ import (
 
 	"github.com/go-telegram/bot"
 	"github.com/go-telegram/bot/models"
-	"github.com/ltbots/backend/internal/webhook/dialogs"
-	"github.com/ltbots/backend/internal/webhook/payment"
-	"github.com/ltbots/backend/internal/webhook/tools"
+	"github.com/merzzzl/sale-bot-app/backend/internal/webhook/dialogs"
+	"github.com/merzzzl/sale-bot-app/backend/internal/webhook/payment"
+	"github.com/merzzzl/sale-bot-app/backend/internal/webhook/tools"
 	"github.com/rs/zerolog/log"
 	"github.com/sashabaranov/go-openai"
 )
