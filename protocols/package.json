@@ -14,7 +14,7 @@
         "ts/api"
     ],
     "scripts": {
-        "build": "tsc -p tsconfig.json"
+        "build": "node scripts/normalize-generated.mjs && tsc -p tsconfig.json"
     },
     "devDependencies": {
         "typescript": "~6.0.3"
