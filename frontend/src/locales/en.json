@@ -1,0 +1,107 @@
+{
+    "bot-list": {
+        "activate": "Activate",
+        "deactivate": "Deactivate",
+        "delete": "Delete",
+        "stats": "Statistics",
+        "error-name": "Unknown name",
+        "error-username": "Information not available",
+        "delete-description": "Are you sure you want to delete this bot? This action cannot be undone. All chats and settings will be permanently removed from the service."
+    },
+    "bot-avatar": {
+        "error-name": "Unknown name",
+        "error-username": "Information not available"
+    },
+    "user-avatar": {
+        "error-name": "Unknown name",
+        "error-username": "Information not available"
+    },
+    "register-bot": {
+        "token-invalid": "Invalid token. Please check your token and try again."
+    },
+    "delete-dialog": {
+        "title": "Delete",
+        "approve": "Delete",
+        "discard": "Cancel"
+    },
+    "product-list": {
+        "delete": "Delete",
+        "delete-description": "Are you sure you want to delete this product? This action cannot be undone."
+    },
+    "product-edit": {
+        "title": "Edit product",
+        "description": "Please provide the product information below. This information will be used to generate responses and create an offer.",
+        "name-label": "Name",
+        "name-description": "The product name displayed to the user",
+        "image-label": "Image",
+        "image-description": "The product image displayed to the user",
+        "description-label": "Description",
+        "description-description": "The product description shown to the user and used by AI",
+        "price-label": "Price",
+        "price-description": "The product price in the selected currency",
+        "pay-label": "Payment link",
+        "pay-description": "The product payment link shown to the user",
+        "submit-button": "Save",
+        "use-invoice-label": "Payment method",
+        "use-invoice-description": "Choose which payment method will be used to pay for the product, by link or inside Telegram",
+        "payment-token-label": "Payment system token",
+        "payment-token-description": "The payment system token used to receive payments inside Telegram, you can get it in the payment system settings"
+    },
+    "bot-actions": {
+        "activate-success": "Bot activated",
+        "deactivate-success": "Bot deactivated",
+        "status-label": "Status",
+        "status-description": "You can activate or deactivate the bot",
+        "delete-label": "Danger zone",
+        "delete-description": "You can delete the bot and all its data, including the token",
+        "delete-button": "Delete",
+        "delete-discard-button": "Cancel",
+        "delete-dialog-description": "Are you sure you want to delete this bot? This action cannot be undone. All chats and settings will be permanently removed from the service."
+    },
+    "bot-params": {
+        "preset-label": "Instruction set",
+        "preset-description": "Select the main instruction set for the bot",
+        "preset-placeholder": "Select an instruction set",
+        "instructions-label": "Instructions",
+        "instructions-placeholder": "Enter instructions",
+        "instructions-description": "For the bot to work correctly, you need to provide instructions. They will be used to generate responses. The more precise and detailed they are, the better.",
+        "save-button": "Save",
+        "save-success": "Settings saved"
+    },
+    "bot-register": {
+        "title": "Connect bot",
+        "discard-title": "Cancel",
+        "description": "A bot token is required to connect a new bot to your account. You can get it in Telegram by following the link",
+        "token-placeholder": "Enter bot token",
+        "save-button": "Save",
+        "token-invalid": "Invalid token. Please check your token and try again."
+    },
+    "bot-tabs": {
+        "instructions": "Instructions",
+        "products": "Products",
+        "actions": "Settings"
+    },
+    "product-add": {
+        "example-name": "New product item",
+        "add": "Add"
+    },
+    "bot-statistics": {
+        "note": "In this section you can view bot statistics for the selected time period.",
+        "7-days": "7 days",
+        "30-days": "30 days",
+        "90-days": "90 days",
+        "messages": "Messages",
+        "messages-description": "The number of messages sent by the bot during the selected period across all conversations",
+        "chats": "Chats",
+        "chats-description": "The number of new chats created by users during the selected period",
+        "payments": "Payments",
+        "payments-description": "The number of clicks on payment links during the selected period"
+    },
+    "error": {
+        "unknown": "An unknown error occurred"
+    },
+    "browser": {
+        "title": "Open this app in Telegram",
+        "body": "This app must be opened inside Telegram (as a Mini App). It will not work in a regular browser."
+    }
+}
