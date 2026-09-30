@@ -1,0 +1,27 @@
+services:
+  backend:
+    image: ghcr.io/ltbots/backend:latest
+    restart: unless-stopped
+    environment:
+      APP_HOSTNAME: localhost
+      APP_OPENAI_API_KEY: <past you open-ai key>
+      APP_OPENAI_MODEL: gpt-5-mini
+      APP_MAIN_BOT_TOKEN: <past you bot token>
+      APP_DB_DRIVER: sqlite
+      APP_DB_URL: /data/sqlite.db
+      APP_MESSAGE_PRICE: 50
+
+  frontend:
+    image: ghcr.io/ltbots/frontend:latest
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.11-alpine
+    restart: unless-stopped
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
